@@ -1,3 +1,5 @@
+import editNameList from "./editNameList.js";
+
 export default function createNameList(name) {
 
     const liElement = document.createElement("li");
@@ -17,6 +19,26 @@ export default function createNameList(name) {
         event.currentTarget.parentElement.remove();
     });
     liElement.append(buttonDeleteElement);
+
+    liElement.addEventListener("click", (event) => {
+
+        console.log("target:", event.target);
+        console.log("currentTarget:", event.currentTarget);
+
+        // só entra em edição ao clicar no próprio li (o texto),
+        // não nos botões "Excluir"/"Alterar" nem no input
+        if (event.target !== event.currentTarget) {
+            return;
+        }
+
+        // se já está em edição (tem input), não reinicia o modo de edição
+        if (event.currentTarget.querySelector("input") !== null) {
+            return;
+        }
+
+        editNameList(event.currentTarget);
+    });
+
     return liElement;
 
 }
