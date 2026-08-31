@@ -1,4 +1,5 @@
 import deleteButtonClickHandler from "../listeners/deleteButtonClickHandler.js";
+import editButtonClickHandler from "../listeners/editButtonClickHandler.js";
 
 export default function userRender(user) {
 
@@ -19,11 +20,22 @@ export default function userRender(user) {
     infoElement.append(nameElement, emailElement);
     liElement.append(infoElement);
 
+    const actionsElement = document.createElement("div");
+    actionsElement.classList.add("d-flex", "gap-2");
+
+    const buttonEditElement = document.createElement("button");
+    buttonEditElement.classList.add("btn", "btn-primary", "btn-sm");
+    buttonEditElement.innerText = "Editar";
+    buttonEditElement.addEventListener("click", editButtonClickHandler);
+    actionsElement.append(buttonEditElement);
+
     const buttonDeleteElement = document.createElement("button");
     buttonDeleteElement.classList.add("btn", "btn-danger", "btn-sm");
     buttonDeleteElement.innerText = "Excluir";
     buttonDeleteElement.addEventListener("click", deleteButtonClickHandler);
-    liElement.append(buttonDeleteElement);
+    actionsElement.append(buttonDeleteElement);
+
+    liElement.append(actionsElement);
 
     return liElement;
 
