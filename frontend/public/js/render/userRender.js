@@ -18,6 +18,7 @@ export default function userRender(user) {
     emailElement.innerText = user.email;
 
     infoElement.append(nameElement, emailElement);
+    infoElement.addEventListener("click", editButtonClickHandler);
     liElement.append(infoElement);
 
     const actionsElement = document.createElement("div");
